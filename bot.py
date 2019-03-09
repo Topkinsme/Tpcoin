@@ -130,8 +130,8 @@ async def makeacc(ctx):
     if not ctx.author.id in money and not ctx.author.id in tpc:
         money[ctx.author.id]=64
         tpc[ctx.author.id]=0
-        ctx.send("Account made.")
+        await ctx.send("Account made.")
     else:
-        ctx.send("You already have an account.")
+        await ctx.send("You already have an account.")
 
 cbot.run(token)
