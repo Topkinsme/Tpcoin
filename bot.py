@@ -19,6 +19,12 @@ async def on_ready():
    a=cbot.get_channel(533992960459538433)
    await a.send("Ye boi is up!")
 
+@cbot.event
+async def on_member_join(a):
+    b= a.id
+    money[b]=64
+    tpc[b]=0
+
 @cbot.command()
 async def ping(ctx):
     print("pong")
@@ -34,5 +40,88 @@ async def logout(ctx):
     else:
         await ctx.send("You do not have permission!")
         pass
+
+money = {}
+tpc= {}
+rvalue = 16
+loop=1
+
+
+value=["up" , "down" , "nothing"]
+
+@cbot.command()
+async def start(ctx):
+    global loop
+    loop =1 
+    while loop==1:
+        what= random.choice(value)
+        global rvalue
+        if what == "up" :
+            rvalue += 2
+        elif what=="down":
+            rvalue -=  2
+        await ctx.send("The current value for 1 money is :- {}" .format( rvalue))
+        print(rvalue)
+        await asyncio.sleep(10)
+
+@cbot.command()
+async def assignmoney(ctx,user:discord.Member,val):
+    a = str(ctx.author.top_role)
+    if a == "Bot_Maker":
+        id=ctx.author.id
+        money[id] =int(val)
+        await ctx.send("Assigned.")
+    else:
+        await ctx.send("You do not have permission!")
+
+@cbot.command()
+async def assigntpcoin(ctx,user:discord.Member,val):
+    a = str(ctx.author.top_role)
+    if a == "Bot_Maker":
+        id=ctx.author.id
+        tpc[id] =int(val)
+        await ctx.send("Assigned.")
+    else:
+        await ctx.send("You do not have permission!")
+
+@cbot.command()
+async def buy(ctx,aount):
+    amount=int(aount)
+    global rvalue
+    id = ctx.author.id
+    num = rvalue * amount
+    if amount > int(money[id]) :
+        await ctx.send("You cannot afford this.")
+    else:
+        tpc[id] += num
+        money[id] -= amount
+        await ctx.send("You own {} tpcoin.Also your balance is{}" .format(tpc[id],money[id]))
+
+@cbot.command()
+async def sell(ctx,aount):
+    amount=int(aount)
+    global rvalue
+    id = ctx.author.id
+    num = amount/rvalue
+    if amount > int(tpc[id]):
+        await ctx.send("You do not own that many tpcs.")
+    else:
+        tpc[id] -= amount
+        money[id] += num
+        await ctx.send("You own {} tpcoin.Also your balance is{}" .format(tpc[id],money[id]))
+    
+@cbot.command()
+async def bal(ctx):
+    id= ctx.author.id
+    await ctx.send("You own {} tpcoin.Also your balance is{}" .format(tpc[id],money[id]))
+
+@cbot.command()
+async def lead(ctx):
+    await ctx.send(money)
+
+@cbot.command()
+async def stop(ctx):
+    global loop
+    loop = 0
 
 cbot.run(token)
