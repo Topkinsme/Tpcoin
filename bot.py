@@ -62,7 +62,7 @@ async def start(ctx):
             rvalue -=  2
         await ctx.send("The current value for 1 money is :- {}" .format( rvalue))
         print(rvalue)
-        await asyncio.sleep(10)
+        await asyncio.sleep(3600)
 
 @cbot.command()
 async def assignmoney(ctx,user:discord.Member,val):
