@@ -7,6 +7,8 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 import asyncio
 import random
+import time
+
 
 token="NTUzNzc4NDI0MTMzNDUxODA0.D2TB4Q.bCBNKMnUOku_8yUt8-tUbgCrA6E"
 
@@ -25,16 +27,22 @@ async def on_member_join(a):
     money[b]=64
     tpc[b]=0
 
+
+
+
+
 @cbot.command()
 async def ping(ctx):
+    '''Checks if the bot is online.'''
     print("pong")
     await ctx.send("Pong")
 
 @cbot.command()
 async def logout(ctx):
+    '''Turns off the bot<Top only>'''
     ath=ctx.message.author
-    rol=str(ath.top_role)
-    if rol=="Bot_Maker" or rol=="ADMINISTRATOR" :
+    id = int(ath.id) 
+    if id== 299000787814842368 :
         await ctx.send("Bye bye!")
         await cbot.logout()
     else:
@@ -51,6 +59,7 @@ value=["up" , "down" , "nothing"]
 
 @cbot.command()
 async def start(ctx):
+    '''Starts the value cycle'''
     global loop
     loop =1 
     while loop==1:
@@ -62,12 +71,13 @@ async def start(ctx):
             rvalue -=  2
         await ctx.send("The current value for 1 money is :- {}" .format( rvalue))
         print(rvalue)
-        await asyncio.sleep(3600)
+        await asyncio.sleep(10)
 
 @cbot.command()
 async def assignmoney(ctx,user:discord.Member,val):
-    a = str(ctx.author.top_role)
-    if a == "Bot_Maker":
+    '''Assigns money to people'''
+    a = int(ctx.author.id)
+    if a == 299000787814842368:
         id=ctx.author.id
         money[id] =int(val)
         await ctx.send("Assigned.")
@@ -76,8 +86,9 @@ async def assignmoney(ctx,user:discord.Member,val):
 
 @cbot.command()
 async def assigntpcoin(ctx,user:discord.Member,val):
-    a = str(ctx.author.top_role)
-    if a == "Bot_Maker":
+    '''Assigns Tp Coins to people'''
+    a = int(ctx.author.id)
+    if a == 299000787814842368:
         id=ctx.author.id
         tpc[id] =int(val)
         await ctx.send("Assigned.")
@@ -86,6 +97,7 @@ async def assigntpcoin(ctx,user:discord.Member,val):
 
 @cbot.command()
 async def buy(ctx,aount):
+    '''Use this to buy Tp coins.Type the amount of money you want to spend.'''
     amount=int(aount)
     global rvalue
     id = ctx.author.id
@@ -99,6 +111,7 @@ async def buy(ctx,aount):
 
 @cbot.command()
 async def sell(ctx,aount):
+    '''Use this to sell Tp coins.Type the number of Tp coins you want to sell.'''
     amount=int(aount)
     global rvalue
     id = ctx.author.id
@@ -112,33 +125,31 @@ async def sell(ctx,aount):
     
 @cbot.command()
 async def bal(ctx):
+    '''Tells you your balance'''
     id= ctx.author.id
     await ctx.send("You own {} tpcoin.Also your balance is{}" .format(tpc[id],money[id]))
 
 @cbot.command()
 async def lead(ctx):
-    await ctx.send(money)
-
-@cbot.command()
-async def stop(ctx):
-    global loop
-    loop = 0
-
+    '''Shows the leader board <WARNING SPAM!!!!!>'''
+    for a in money:
+        await ctx.send("<@{}> , :- {}" .format(a,money[a]))
 
 @cbot.command()
 async def makeacc(ctx):
+    '''Makes you an account.Use this is .buy and .sell are not working for you.'''
     if not ctx.author.id in money and not ctx.author.id in tpc:
         money[ctx.author.id]=64
         tpc[ctx.author.id]=0
         await ctx.send("Account made.")
     else:
         await ctx.send("You already have an account.")
-         
+
 @cbot.command()
 async def cvalue(ctx):
-   global rvalue
-   await ctx.send("The current value is {}" .format(rvalue))
-   
-                
+    '''Tells you the current value of 1 money in Tp coins.'''
+    global rvalue
+    await ctx.send("The current value is {}" .format(rvalue))
+
 
 cbot.run(token)
