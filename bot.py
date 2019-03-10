@@ -71,11 +71,11 @@ async def start(ctx):
             rvalue -=  2
         await ctx.send("The current value for 1 money is :- {}" .format( rvalue))
         print(rvalue)
-        await asyncio.sleep(10)
+        await asyncio.sleep(3600)
 
 @cbot.command()
 async def assignmoney(ctx,user:discord.Member,val):
-    '''Assigns money to people'''
+    '''Assigns money to people<Top only>'''
     a = int(ctx.author.id)
     if a == 299000787814842368:
         id=ctx.author.id
@@ -86,7 +86,7 @@ async def assignmoney(ctx,user:discord.Member,val):
 
 @cbot.command()
 async def assigntpcoin(ctx,user:discord.Member,val):
-    '''Assigns Tp Coins to people'''
+    '''Assigns Tp Coins to people<Top only>'''
     a = int(ctx.author.id)
     if a == 299000787814842368:
         id=ctx.author.id
