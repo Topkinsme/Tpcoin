@@ -71,6 +71,7 @@ async def start(ctx):
             rvalue -=  2
         await ctx.send("The current value for 1 money is :- {}" .format( rvalue))
         print(rvalue)
+        await cbot.change_presence(activity=discord.Game(name="Type .makeacc to get started!Type .help for more info ! Current value=" & rvalue, type = 2))
         await asyncio.sleep(3600)
 
 @cbot.command()
