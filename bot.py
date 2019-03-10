@@ -137,7 +137,7 @@ async def makeacc(ctx):
 @cbot.command()
 async def cvalue(ctx):
    global rvalue
-   await ctx.send("The current value is {}" .format())
+   await ctx.send("The current value is {}" .format(rvalue))
    
                 
 
