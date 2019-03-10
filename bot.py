@@ -133,5 +133,12 @@ async def makeacc(ctx):
         await ctx.send("Account made.")
     else:
         await ctx.send("You already have an account.")
+         
+@cbot.command()
+async def cvalue(ctx):
+   global rvalue
+   await ctx.send("The current value is {}" .format())
+   
+                
 
 cbot.run(token)
