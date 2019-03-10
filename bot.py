@@ -17,7 +17,7 @@ cbot = commands.Bot(command_prefix = ".")
 @cbot.event
 async def on_ready():
    print("Ye boi is up!")
-   await cbot.change_presence(activity=discord.Game(name="With Top!", type = 2))
+   await cbot.change_presence(activity=discord.Game(name="Type .makeacc to get started!Type .help for more info !", type = 2))
    a=cbot.get_channel(533992960459538433)
    await a.send("Ye boi is up!")
 
