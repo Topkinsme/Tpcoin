@@ -10,7 +10,7 @@ import random
 import time
 
 
-token="NTUzNzc4NDI0MTMzNDUxODA0.D2TB4Q.bCBNKMnUOku_8yUt8-tUbgCrA6E"
+token="<Your Token>"
 
 cbot = commands.Bot(command_prefix = ".")
 
