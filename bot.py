@@ -113,10 +113,11 @@ async def msg(ctx):
     global smnum
     aa=1
     while aa==1:
+        await asyncio.sleep(600)
         while smnum==1:
             smunum=0
             await ctx.send("The current value for 1 money is :- {}" .format(rvalue))
-            await asyncio.sleep(10)
+            
    
 
 @cbot.command()
