@@ -62,6 +62,7 @@ async def on_ready():
       print(rvalue)
       store(money,rvalue,tpc)
       await cbot.change_presence(activity=discord.Game(name="Type .makeacc to get started!Type .help for more info ! Current value=" + str(rvalue)))
+      smnum=1
       await asyncio.sleep(3600)  
             
 
