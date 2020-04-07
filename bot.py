@@ -21,6 +21,7 @@ async def on_ready():
    global money
    global rvalue
    global tpc
+   global smnum
    print("Ye boi is up!")
    await cbot.change_presence(activity=discord.Game(name="Type .makeacc to get started!Type .help for more info !", type = 2))
    a=cbot.get_channel(533992960459538433)
@@ -49,6 +50,7 @@ async def on_ready():
    global loop
    store(money,rvalue,tpc)
    loop =1 
+   smnum=1
    while loop==1:
       what= random.choice(value)
       if what == "up" :
@@ -107,11 +109,13 @@ value=["up","down" ]
 @cbot.command()
 async def msg(ctx):
     '''send a message which updates you ont he vals'''
+    global smnum
     aa=1
-    msg= await ctx.send("The current value for 1 money is :- {}" .format(rvalue))
     while aa==1:
-       await msg.edit(content="The current value for 1 money is :- {}" .format(rvalue))
-       await asyncio.sleep(600)
+        while smnum==1:
+            smunum=0
+            await ctx.send("The current value for 1 money is :- {}" .format(rvalue))
+            await asyncio.sleep(10)
    
 
 @cbot.command()
