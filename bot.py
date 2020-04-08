@@ -15,6 +15,7 @@ token = "Your Token"
 startcycle=0
 
 cbot = commands.Bot(command_prefix = ".")
+cbot.remove_command('help')
 
 @cbot.event
 async def on_ready():
@@ -231,6 +232,24 @@ async def cvalue(ctx):
     global tpc
     store(money,rvalue,tpc)
     await ctx.send("The current value is {}" .format(rvalue))
+
+@cbot.command()
+async def help(ctx):
+    help=discord.Embed(colour=discord.Colour.blue())
+    help.set_author(name="HELP (Prefix = . )")
+    help.add_field(name="What is this game?/I don't understand how to use this bot",value="This is a simulation of a sort of bitcoin simulator written by <@299000787814842368> \n You basically start with 64 currency which you can trade for TpCoins. The value of these TpCoins change every hour. The value can either be inflated or be depreciated. Trading doen't change the value , the value only changes periodically by the action of the bot.\n The aim is to collect the most coins(currency not TpCoins) and see the best way to do it .",inline="false")
+    help.add_field(name="How can I get started?",value="To get started , you need an account.To make an account , type in .makeacc  .Then you can start buying and selling by .buy and .sell respectively.You can only buy and sell with what you own,(Obviously). To check your balance , use .bal and to check the value of the coins , use .cvalue  .That should be it. \n\n A list of all commands and what they do are given below. Have fun!",inline="false")
+    help.add_field(name="Help",value="Displays this message",inline="false")
+    help.add_field(name="Ping",value="Returns pong",inline="false")
+    help.add_field(name="Logout",value="Turns off the bot",inline="false")
+    help.add_field(name="msg",value="Sends an update message each time the value of 1 cp coin changes.(WARNING VERY BUGGY DOESN'T QUIET WORK....)",inline="false")
+    help.add_field(name="Buy (Syntax = .buy <Number of coins>)",value="Allows you to buy TpCoins using currency",inline="false")
+    help.add_field(name="Sell (Syntax = .sell <Number of TpCoins>)",value="Allows you to sell TpCoins for Currency",inline="false")
+    help.add_field(name="Bal",value="Tells you your account balance.",inline="false")
+    help.add_field(name="Lead",value="Prints out all the players and the currency they own. (WARNING CAUSES SPAM)",inline="false")
+    help.add_field(name="Makeacc",value="Use this to make an account. Use this command if .buy and .sell or .bal aren't working for you.",inline="false")
+    help.add_field(name="cvalue",value="Tell you the value of 1 currency in terms of TpCoins.",inline="false")
+    await ctx.send(embed=help)
 
 def store(money,rvalue,tpc):    
     with open('money.json', 'w+') as f:
